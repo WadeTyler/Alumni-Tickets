@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/event", eventRoutes);
+app.use("/api/events", eventRoutes);
 
 const port = process.env.PORT || 8081;
 

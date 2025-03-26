@@ -1,5 +1,5 @@
 
-export type Event = {
+export type EventType = {
   id: number;
   creator_id: string;
   name: string;
