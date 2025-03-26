@@ -4,8 +4,9 @@ import {
   createNewUser,
   existsByEmail,
   getAuthCookieOptions,
-  getLogoutCookieOptions, isValidEmail
+  getLogoutCookieOptions
 } from "../utils/auth.util.ts";
+import {isValidEmail} from "../utils/util.ts";
 import type {AuthRequest, User} from "../../../types/auth.types.ts";
 import {createAuthToken} from "../utils/jwt.util.ts";
 

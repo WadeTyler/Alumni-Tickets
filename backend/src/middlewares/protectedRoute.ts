@@ -22,7 +22,6 @@ const protectedRoute = async (req: any, res: any, next: any) => {
     req.body.user = user;
     next();
   } catch (e) {
-    console.log("Protected Route Error caught: ", e);
     return res.status(401).json({message: "You are not authorized to perform that action."});
   }
 }
