@@ -9,24 +9,37 @@
 
     <a routerLink="/tickets" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
       <ng-icon name="remixCouponLine" class="text-lg"></ng-icon>
-      <h1 class="text-base">View Ticket</h1>
+      <span class="text-base">View Ticket</span>
     </a>
 
     <a routerLink="/tickets/use" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
       <ng-icon name="remixCouponLine" class="text-lg"></ng-icon>
-      <h1 class="text-base">Use Ticket</h1>
+      <span class="text-base">Use Ticket</span>
     </a>
   </div>
 
   <div class="flex items-center gap-8">
-    <a routerLink="/login" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
-      <ng-icon name="remixLoginBoxLine" class="text-lg"></ng-icon>
-      <h1 class="text-base">Login</h1>
-    </a>
-    <a routerLink="/signup" class="submit-btn">
-      <ng-icon name="remixLoginCircleLine" class="text-lg"></ng-icon>
-      <h1 class="text-base">Signup</h1>
-    </a>
+    @if (!this.authService.currentUser()) {
+      <a routerLink="/login" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
+        <ng-icon name="remixLoginBoxLine" class="text-lg"></ng-icon>
+        <span class="text-base">Login</span>
+      </a>
+      <a routerLink="/signup" class="submit-btn">
+        <ng-icon name="remixLoginCircleLine" class="text-lg"></ng-icon>
+        <span class="text-base">Signup</span>
+      </a>
+    }
+    @else {
+      <button (click)="handleLogout()" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
+        <ng-icon name="remixLogoutBoxLine" class="text-lg"></ng-icon>
+        <span class="text-base">Logout</span>
+      </button>
+      <a routerLink="/events/create" class="submit-btn">
+        <ng-icon name="remixCalendarEventLine" class="text-lg"></ng-icon>
+        <span class="text-base">Create Event</span>
+      </a>
+    }
+
   </div>
 
 </div>
