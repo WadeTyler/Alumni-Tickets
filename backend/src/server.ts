@@ -1,5 +1,6 @@
 import express from 'express';
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 import 'dotenv/config';
 import db from './config/db.config.ts';
 
@@ -8,7 +9,15 @@ import authRoutes from './routes/auth.routes.ts';
 import eventRoutes from './routes/event.routes.ts';
 import ticketRoutes from "./routes/ticket.routes.ts";
 
+const corsOptions = {
+  origin: "http://localhost:4200",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true
+}
+
 const app = express();
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 

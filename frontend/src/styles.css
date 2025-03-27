@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-foreground: #06062a;
+  --color-background: #f4f4f4;
+  --color-secondary: #ffbe45;
+  --color-accent: #5dd5c4;
+  --color-accent-dark: #3e9184;
+  --color-accent-light: #67eeda;
+  --color-danger: #9f0000;
+}
+
+body {
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+@theme {
+  --color-foreground: var(--color-foreground);
+  --color-background: var(--color-background);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-light: var(--color-accent-light);
+  --color-danger: var(--color-danger);
+}
+
+.page-padding {
+  @apply lg:p-16 lg:pt-28 md:p-8 md:p-20 p-4 pt-16
+}
+
+.submit-btn {
+  @apply px-3 py-1 rounded-md shadow-md hover:shadow-lg bg-accent hover:bg-accent-dark text-white duration-200 inline-flex gap-2 items-center justify-center cursor-pointer;
+}
+
+.input-container {
+  @apply flex flex-col gap-1 w-full;
+}
+
+.input-label {
+  @apply text-gray-500;
+}
+
+.input-bar {
+  @apply w-full border border-gray-300 p-2 rounded-md placeholder:text-gray-300 focus:outline-none focus:border-accent duration-200;
+}
+
+.form-container {
+  @apply w-full bg-white rounded-md shadow-lg lg:p-8 p-4 flex flex-col lg:gap-8 gap-4;
+}
