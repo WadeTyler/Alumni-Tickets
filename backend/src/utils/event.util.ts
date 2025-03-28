@@ -1,6 +1,7 @@
 import type {CreateEventRequest, EventType} from "../../../types/event.types.ts";
 import type {User} from "../../../types/auth.types.ts";
 import db from "../config/db.config.ts";
+import {handleUpload} from "./cloudinary.util.ts";
 
 // VARS
 const MAX_USER_EVENTS = 5;
@@ -28,10 +29,18 @@ export async function attemptCreateEvent(createRequest: CreateEventRequest, user
 
   validateCreateEventFields(createRequest);
 
+
+  let imageURL = null;
+
+  if (createRequest.image) {
+  // Attempt upload image
+    imageURL = await handleUpload(createRequest.image);
+  }
+
   const result = await db.query("INSERT INTO events(creator_id, name, image, description, Date, time, total_tickets, tickets_remaining, ticket_price) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *", [
     user.id,
     createRequest.name,
-    createRequest.image,
+    imageURL,
     createRequest.description,
     new Date(createRequest.date).toISOString().split("T")[0], // CONVERT TO ISO DATE
     createRequest.time,

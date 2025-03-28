@@ -70,6 +70,7 @@ export class CreateEventComponent {
 
     const createRequest: CreateEventRequest = ({
       ...this.createEventForm.value,
+      image: this.imagePreview,
       total_tickets: Number(this.createEventForm.get('total_tickets')?.value),
       tickets_remaining: Number(this.createEventForm.get('tickets_remaining')?.value),
       ticket_price: Number(this.createEventForm.get('ticket_price')?.value) * 100,  // Convert to cents
