@@ -7,6 +7,8 @@ import {PurchaseTicketComponent} from './event-details/purchase-ticket/purchase-
 import {
   PurchaseTicketSuccessComponent
 } from './event-details/purchase-ticket/purchase-ticket-success/purchase-ticket-success.component';
+import {CreateEventComponent} from './create-event/create-event.component';
+import {AuthGuard} from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -18,6 +20,12 @@ export const routes: Routes = [
     path: "signup",
     component: SignupComponent,
     title: "Signup | Alumni Events"
+  },
+  {
+    path: "events/create",
+    component: CreateEventComponent,
+    title: "Create Event | Alumni Events",
+    canActivate: [AuthGuard]
   },
   {
     path: "events/:id",

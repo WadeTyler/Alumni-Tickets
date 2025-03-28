@@ -1,0 +1,101 @@
+<div class="page-padding w-full min-h-screen flex flex-col items-center">
+
+  <form class="form-container max-w-[30rem] gap-4! text-sm!" [formGroup]="createEventForm"
+        (ngSubmit)="submitCreateEventForm()">
+    <div>
+      <h1 class="text-accent text-center text-2xl ">Create Event</h1>
+      <p class="input-label italic text-sm text-center">Let's create your very own event!</p>
+    </div>
+    <hr class="border w-full border-accent">
+
+    <div class="input-container">
+      <label for="name" class="input-label">NAME:</label>
+      <input formControlName="name" type="text" id="name" class="input-bar"
+             placeholder="Event Name (Ex: My Birthday Part)">
+    </div>
+    <div class="input-container">
+      <label for="description" class="input-label">DESCRIPTION:</label>
+      <textarea
+        formControlName="description"
+        id="description"
+        class="input-bar resize-none h-24"
+        placeholder="Event Description (Ex: This is my birthday party...)"
+      ></textarea>
+      <!-- Count the number of characters in the description -->
+      <span
+        class="text-xs text-end"
+        [ngClass]="{'text-danger' : createEventForm.get('description')?.value.length > MAX_DESCRIPTION_LENGTH}"
+      >
+        {{ createEventForm.get('description')?.value?.length }} / {{ MAX_DESCRIPTION_LENGTH }}
+      </span>
+    </div>
+
+    <div class="input-container">
+      @if (createEventForm.get('image')?.value) {
+        <img [src]="imagePreview" alt="Uploaded Image" class="w-full h-32 object-cover object-center rounded-md">
+      }
+
+      <div class="flex items-center gap-4 w-full">
+        <label for="image" class="submit-btn bg-gray-400! hover:bg-gray-600! w-full">
+          @if (imagePreview) {
+            <span>Change Image</span>
+          } @else {
+            <span>Upload an Image (Optional)</span>
+          }
+        </label>
+        <input formControlName="image" type="file" id="image" class="hidden" accept="image/*"
+               placeholder="Upload an Image" (change)="onImageSelected($event)">
+
+        @if (imagePreview) {
+          <button class="submit-btn bg-red-700! hover:bg-red-800!" type="button" (click)="removeImage()">X</button>
+        }
+
+      </div>
+
+
+    </div>
+
+    <div class="flex gap-4 items-center w-full">
+      <div class="input-container">
+        <label for="date" class="input-label">DATE:</label>
+        <input formControlName="date" type="date" id="date" class="input-bar">
+      </div>
+
+      <div class="input-container">
+        <label for="time" class="input-label">TIME:</label>
+        <input formControlName="time" type="time" id="time" class="input-bar">
+      </div>
+    </div>
+
+    <div class="flex gap-4 items-center w-full">
+      <div class="input-container">
+        <label for="total_tickets" class="input-label">TOTAL TICKETS:</label>
+        <input formControlName="total_tickets" type="text" id="total_tickets" class="input-bar"
+               placeholder="Total Tickets (Ex: 100)">
+      </div>
+
+      <div class="input-container">
+        <label for="tickets_remaining" class="input-label">TICKETS REMAINING:</label>
+        <input formControlName="tickets_remaining" type="text" id="tickets_remaining" class="input-bar"
+               placeholder="Tickets Remaining (Ex: 100)">
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="ticket_price" class="input-label">PRICE PER TICKET (USD):</label>
+      <input formControlName="ticket_price" id="ticket_price" type="text" placeholder="Ticket Price in USD (Ex: $19.99)"
+             class="input-bar">
+    </div>
+
+    @if (this.eventService.createEventError) {
+      <span class="text-danger text-sm text-center">{{ this.eventService.createEventError }}</span>
+    }
+
+    <button type="submit" class="submit-btn">
+      <ng-icon name="remixCalendarCheckLine" class="text-lg"></ng-icon>
+      <span>Create Event</span>
+    </button>
+
+  </form>
+
+</div>

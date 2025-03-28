@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, map, Observable, of} from 'rxjs';
+import {CreateEventRequest} from '../../../../../types/event.types';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class EventService {
   // States
   isLoadingEvents: boolean = false;
   loadEventsError: string = '';
+
+  isCreatingEvent: boolean = false;
+  createEventError: string = '';
 
   isLoadingEvent: boolean = false;
   loadEventError: string = '';
@@ -53,6 +57,27 @@ export class EventService {
         return of(null);
       })
     );
+  }
+
+  // Attempt to create event
+  public createEvent(createRequest: CreateEventRequest): Observable<any> {
+    this.isCreatingEvent = true;
+    this.createEventError = '';
+
+    return this.http.post<any>(`${this.apiURL}/events`, createRequest, {withCredentials: true}).pipe(
+      map(response => {
+        if (response.event) {
+          this.isCreatingEvent = false;
+          return response.event;
+        }
+        throw new Error(response.message || "Something went wrong. Try again later.");
+      }),
+      catchError(e => {
+        this.isCreatingEvent = false;
+        this.createEventError = e.error.message || "Something went wrong. Try again later.";
+        return of(null);
+      })
+    )
   }
 
 }
