@@ -57,6 +57,10 @@ export class AuthService {
         if (response && response.user) {
           this.currentUserSubject.next(response.user);
           this.isLoggingIn = false;
+
+          // Add a flag to local storage to indicate that the user has logged in
+          localStorage.setItem('hasLoggedIn', 'true');
+
           return response.user;
         } else {
           this.currentUserSubject.next(null);

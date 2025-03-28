@@ -3,7 +3,7 @@ import {NgIcon, provideIcons} from "@ng-icons/core";
 import {NgClass, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from '../core/services/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthRequest} from '../../../../types/auth.types';
 import {remixLoginCircleLine} from '@ng-icons/remixicon';
 import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';
@@ -27,7 +27,7 @@ export class SignupComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(protected authService: AuthService, private router: Router) {
+  constructor(protected authService: AuthService, private router: Router, private route: ActivatedRoute) {
   }
 
   handleSignupSubmit(): void {
@@ -40,7 +40,17 @@ export class SignupComponent {
 
     this.authService.signup(signupRequest).subscribe((val) => {
       if (val) {
-        this.router.navigate(['/']);
+        const continueTo = this.route.snapshot.queryParamMap.get('continueTo') || '/';
+        this.router.navigateByUrl(continueTo);
+      }
+    });
+  }
+
+  navigateToLogin(): void {
+    const continueTo = this.route.snapshot.queryParamMap.get('continueTo') || '/';
+    this.router.navigate(['/login'], {
+      queryParams: {
+        continueTo: continueTo
       }
     });
   }

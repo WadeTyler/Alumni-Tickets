@@ -4,7 +4,7 @@ import {remixLoader2Line, remixLoginBoxLine} from '@ng-icons/remixicon';
 import {AuthService} from '../core/services/auth.service';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthRequest} from '../../../../types/auth.types';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NgClass, NgIf} from '@angular/common';
 import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';
 
@@ -22,7 +22,7 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(protected authService: AuthService, private router: Router) {
+  constructor(protected authService: AuthService, private router: Router, private route: ActivatedRoute) {
   }
 
   handleLoginSubmit(): void {
@@ -35,7 +35,17 @@ export class LoginComponent {
 
     this.authService.login(loginRequest).subscribe((val) => {
       if (val) {
-        this.router.navigate(['/']);
+        const continueTo = this.route.snapshot.queryParamMap.get('continueTo') || '/';
+        this.router.navigateByUrl(continueTo);
+      }
+    });
+  }
+
+  navigateToSignup(): void {
+    const continueTo = this.route.snapshot.queryParamMap.get('continueTo') || '/';
+    this.router.navigate(['/signup'], {
+      queryParams: {
+        continueTo: continueTo
       }
     });
   }
