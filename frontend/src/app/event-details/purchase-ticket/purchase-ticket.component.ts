@@ -10,6 +10,7 @@ import {PurchaseTicketsRequest, Ticket} from '../../../../../types/ticket.types'
 import {TicketService} from '../../core/services/ticket.service';
 import {NgIf} from '@angular/common';
 import {TicketTimerComponent} from '../../shared/components/ticket-timer/ticket-timer.component';
+import {SpinnerIconComponent} from '../../shared/components/spinner-icon/spinner-icon.component';
 
 @Component({
   selector: 'app-purchase-ticket',
@@ -18,7 +19,8 @@ import {TicketTimerComponent} from '../../shared/components/ticket-timer/ticket-
     RouterLink,
     ReactiveFormsModule,
     NgIf,
-    TicketTimerComponent
+    TicketTimerComponent,
+    SpinnerIconComponent
   ],
   providers: [provideIcons({remixCalendar2Line, remixTimeLine, remixShoppingCartLine})],
   templateUrl: './purchase-ticket.component.html',

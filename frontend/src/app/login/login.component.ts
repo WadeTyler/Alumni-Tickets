@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { remixLoginBoxLine } from '@ng-icons/remixicon';
+import {remixLoader2Line, remixLoginBoxLine} from '@ng-icons/remixicon';
 import {AuthService} from '../core/services/auth.service';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthRequest} from '../../../../types/auth.types';
 import {Router} from "@angular/router";
 import {NgClass, NgIf} from '@angular/common';
+import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';
 
 @Component({
   selector: 'app-login',
-  imports: [NgIcon, ReactiveFormsModule, NgClass, NgIf],
-  providers: [provideIcons({ remixLoginBoxLine })],
+  imports: [NgIcon, ReactiveFormsModule, NgClass, NgIf, SpinnerIconComponent],
+  providers: [provideIcons({ remixLoginBoxLine, remixLoader2Line })],
   templateUrl: './login.component.html',
   styles: ``
 })

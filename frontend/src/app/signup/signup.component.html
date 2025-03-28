@@ -31,8 +31,14 @@
       }
 
       <button class="submit-btn" [ngClass]="{'bg-accent-dark! cursor-not-allowed!' : this.authService.isSigningUp}" type="submit" [disabled]="this.authService.isSigningUp">
-        <ng-icon name="remixLoginCircleLine" class="text-lg"></ng-icon>
-        Signup
+        @if (!this.authService.isSigningUp) {
+          <ng-icon name="remixLoginCircleLine" class="text-lg"></ng-icon>
+          Signup
+        }
+        @else {
+          <app-spinner-icon></app-spinner-icon>
+          Signing up...
+        }
       </button>
     </form>
   </div>

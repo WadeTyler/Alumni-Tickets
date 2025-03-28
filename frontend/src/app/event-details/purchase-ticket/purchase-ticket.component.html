@@ -121,9 +121,14 @@
             <p class="text-danger text-sm">{{ this.ticketService.purchaseTicketsError }}</p>
           }
 
-          <button class="submit-btn" type="submit">
-            <ng-icon name="remixShoppingCartLine" class="text-lg"></ng-icon>
-            Checkout
+          <button class="submit-btn" type="submit" [disabled]="this.ticketService.isPurchasingTickets">
+            @if (!this.ticketService.isPurchasingTickets) {
+              <ng-icon name="remixShoppingCartLine" class="text-lg"></ng-icon>
+              Checkout
+            } @else {
+              <app-spinner-icon></app-spinner-icon>
+              Processing...
+            }
           </button>
 
         </form>

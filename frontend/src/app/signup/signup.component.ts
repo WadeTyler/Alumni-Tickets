@@ -6,6 +6,7 @@ import {AuthService} from '../core/services/auth.service';
 import {Router} from '@angular/router';
 import {AuthRequest} from '../../../../types/auth.types';
 import {remixLoginCircleLine} from '@ng-icons/remixicon';
+import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,8 @@ import {remixLoginCircleLine} from '@ng-icons/remixicon';
     NgIcon,
     NgIf,
     ReactiveFormsModule,
-    NgClass
+    NgClass,
+    SpinnerIconComponent
   ],
   providers: [provideIcons({ remixLoginCircleLine})],
   templateUrl: './signup.component.html',
