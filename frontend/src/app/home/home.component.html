@@ -1,21 +1,24 @@
 <div class="page-padding w-full min-h-screen flex flex-col items-center gap-8">
 
   <header class="lg:max-w-[40rem] w-full text-center">
-    <h1 class="text-accent-dark md:text-2xl text-lg tracking-widest">Alumni Events</h1>
-    <h2 class="text-accent font-semibold tracking-widest md:text-4xl text-xl md:my-4 my-2">RECONNECT & CELEBRATE</h2>
-    <p class="font-light">
+    <h1 class="text-accent-dark md:text-2xl text-lg tracking-widest animate-fade-up">Alumni Events</h1>
+    <h2 class="text-accent font-semibold tracking-widest md:text-4xl text-xl md:my-4 my-2 animate-fade-up-1">RECONNECT & CELEBRATE</h2>
+    <p class="font-light animate-fade-up-2">
       Discover exclusive gatherings tailored to your interests or showcase your own epic reunions. Your alumni network
       awaits!
     </p>
   </header>
 
-  <hr class="border w-full border-accent">
+  <hr class="border w-full border-accent animate-fade-up-3">
 
   <!-- Events -->
-  <div class="w-full grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+  <div class="w-full grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 animate-fade-up-3">
     @for (event of events; track event) {
       <app-event-panel [event]="event"></app-event-panel>
     }
   </div>
 
 </div>
+
+
+
