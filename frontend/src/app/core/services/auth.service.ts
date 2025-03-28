@@ -11,7 +11,6 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   public currentUser() {
-    console.log("VALUE: ", this.currentUserSubject.getValue())
     return this.currentUserSubject.getValue();
   }
 

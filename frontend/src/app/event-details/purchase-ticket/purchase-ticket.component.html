@@ -1,1 +1,138 @@
-<p>purchase-ticket works!</p>
+<div class="page-padding w-full min-h-screen flex lg:gap-16">
+
+
+  @if (!event && !this.eventService.isLoadingEvent) {
+    <!-- EVENT NOT FOUND -->
+    <div class="w-full h-full flex items-center justify-center">
+      <p class="tracking-wide text-accent-dark text-xl max-w-96 text-center">The event your looking for could not be
+        found. Please try again later.</p>
+    </div>
+  } @else if (event && !this.eventService.isLoadingEvent && event.tickets_remaining === 0) {
+    <!-- SOLD OUT -->
+    <div class="w-full h-full flex flex-col gap-4 items-center justify-center">
+      <span class="text-danger font-semibold text-3xl text-center">SOLD OUT</span>
+      <span>Sorry! Looks like the event you're looking for is sold out!</span>
+      <a routerLink="/" class="submit-btn">Check out other events</a>
+    </div>
+  } @else if (event && !this.eventService.isLoadingEvent && event.tickets_remaining !== 0) {
+    <!-- PURCHASE PANEL -->
+    <div class="flex md:flex-row flex-col-reverse xl:gap-32 gap-8 xl:items-start items-center justify-center w-full">
+
+      <!-- Info Container -->
+      <div class="flex md:flex-col flex-col-reverse gap-4 w-full">
+
+        <!-- Image Container -->
+        @if (event.image) {
+          <div class="xl:max-w-4xl max-w-full">
+            <div class="aspect-video relative">
+              <img [src]="event.image" alt="Event Image" class="w-full h-full object-center object-cover">
+            </div>
+          </div>
+        }
+
+        <!-- Text Container -->
+        <div class="flex flex-col gap-4 w-full">
+          <h1 class="text-accent text-3xl font-semibold">{{ event.name }}</h1>
+          <p class="text-lg text-gray-400 font-light inline-flex items-center gap-2">
+            <ng-icon name="remixCalendar2Line" class="text-lg"></ng-icon>
+            <span>{{ event.date.split("T")[0] }}</span>
+          </p>
+          <p class="text-lg text-gray-400 font-light inline-flex items-center gap-2">
+            <ng-icon name="remixTimeLine" class="text-lg"></ng-icon>
+            <span>{{ event.time }}</span>
+          </p>
+          <p class="sm:text-base text-sm font-light">{{ event.description }}</p>
+        </div>
+      </div>
+
+
+      @if (this.ticketService.isTimeExpired) {
+        <!-- TIME EXPIRED -->
+        <div class="form-container h-fit max-w-96">
+        <h5 class="text-accent text-3xl text-center">Time Expired</h5>
+          <p class="text-accent-dark font-light text-center">Sorry, you cannot purchase this ticket at this time. Please try again
+            if you still wish to purchase them.</p>
+        </div>
+      } @else {
+        <!-- PURCHASE CONTAINER -->
+        <form class="form-container h-fit max-w-96" [formGroup]="purchaseTicketsForm" (ngSubmit)="submitPurchaseForm()">
+
+          <h2 class="text-accent text-3xl text-center">Purchase Tickets</h2>
+
+          <div class="input-container">
+            <label for="first_name" class="input-label">FIRST NAME:</label>
+            <input type="text" class="input-bar" id="first_name" formControlName="first_name"
+                   placeholder="First Name (Ex: John)">
+            <div
+              class="text-danger text-sm"
+              *ngIf="purchaseTicketsForm.get('first_name')?.invalid && (purchaseTicketsForm.get('first_name')?.dirty || purchaseTicketsForm.get('first_name')?.touched)"
+            >
+              <p *ngIf="purchaseTicketsForm.get('first_name')?.errors?.['required']">First name is required.</p>
+              <p *ngIf="purchaseTicketsForm.get('first_name')?.errors?.['maxlength']">Max length of 50</p>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <label for="last_name" class="input-label">LAST NAME:</label>
+            <input type="text" class="input-bar" id="last_name" formControlName="last_name"
+                   placeholder="Last Name (Ex: Doe)">
+            <div
+              class="text-danger text-sm"
+              *ngIf="purchaseTicketsForm.get('last_name')?.invalid && (purchaseTicketsForm.get('last_name')?.dirty || purchaseTicketsForm.get('last_name')?.touched)"
+            >
+              <p *ngIf="purchaseTicketsForm.get('last_name')?.errors?.['required']">Last name is required.</p>
+              <p *ngIf="purchaseTicketsForm.get('last_name')?.errors?.['maxlength']">Max length of 50</p>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <label for="email" class="input-label">EMAIL:</label>
+            <input type="email" class="input-bar" id="email" formControlName="email"
+                   placeholder="Email (Ex: johndoe@example.com)">
+            <div
+              class="text-danger text-sm"
+              *ngIf="purchaseTicketsForm.get('email')?.invalid && (purchaseTicketsForm.get('email')?.dirty || purchaseTicketsForm.get('email')?.touched)"
+            >
+              <p *ngIf="purchaseTicketsForm.get('email')?.errors?.['required']">Email is required.</p>
+              <p *ngIf="purchaseTicketsForm.get('email')?.errors?.['email']">Please enter a valid email.</p>
+              <p *ngIf="purchaseTicketsForm.get('email')?.errors?.['maxlength']">Max length of 317.</p>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <label for="quantity" class="input-label">QUANTITY:</label>
+            <input type="number" class="input-bar" id="quantity" formControlName="quantity"
+                   placeholder="Quantity (1-3)">
+            <div
+              class="text-danger text-sm"
+              *ngIf="purchaseTicketsForm.get('quantity')?.invalid && (purchaseTicketsForm.get('quantity')?.dirty || purchaseTicketsForm.get('quantity')?.touched)"
+            >
+              <p *ngIf="purchaseTicketsForm.get('quantity')?.errors?.['required']">Quantity is required.</p>
+              <p *ngIf="purchaseTicketsForm.get('quantity')?.errors?.['max']">You can only buy a max of 3 tickets at
+                once.</p>
+              <p *ngIf="purchaseTicketsForm.get('quantity')?.errors?.['min']">You must have a minimum of 1 ticket to
+                purchase.</p>
+            </div>
+          </div>
+
+          <p class="text-gray-400 font-light">Total Price: ${{ totalPrice / 100 }} USD</p>
+
+          @if (this.ticketService.purchaseTicketsError) {
+            <p class="text-danger text-sm">{{ this.ticketService.purchaseTicketsError }}</p>
+          }
+
+          <button class="submit-btn" type="submit">
+            <ng-icon name="remixShoppingCartLine" class="text-lg"></ng-icon>
+            Checkout
+          </button>
+
+        </form>
+      }
+
+      <app-ticket-timer></app-ticket-timer>
+
+    </div>
+  }
+
+
+</div>
