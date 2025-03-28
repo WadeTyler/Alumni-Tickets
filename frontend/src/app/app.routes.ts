@@ -4,6 +4,9 @@ import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {EventDetailsComponent} from './event-details/event-details.component';
 import {PurchaseTicketComponent} from './event-details/purchase-ticket/purchase-ticket.component';
+import {
+  PurchaseTicketSuccessComponent
+} from './event-details/purchase-ticket/purchase-ticket-success/purchase-ticket-success.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +28,11 @@ export const routes: Routes = [
     path: "events/:id/purchase-ticket",
     component: PurchaseTicketComponent,
     title: "Purchase Ticket | Alumni Events"
+  },
+  {
+    path: "events/:id/purchase-ticket/success",
+    component: PurchaseTicketSuccessComponent,
+    title: "Ticket's Purchased! | Alumni Events"
   },
   {
     path: "",

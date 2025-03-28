@@ -55,20 +55,7 @@
   <hr class="w-full border border-accent">
 
   <!-- Other Events -->
-  @if (otherEvents && !this.eventService.isLoadingEvents) {
-    <div class="w-full flex flex-col gap-8 items-center justify-center">
-      <div class="">
-        <h4 class="text-accent font-light text-2xl text-center">More upcoming events</h4>
-        <p class="text-sm text-gray-400 font-light text-center mt-2">Because why limit yourself to only one time?</p>
-      </div>
-
-      <div class="w-full grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-        @for (event of otherEvents; track event) {
-          <app-event-panel [event]="event"></app-event-panel>
-        }
-      </div>
-    </div>
-  }
+  <app-other-events [ignoreEventId]="event?.id"></app-other-events>
 
 
 

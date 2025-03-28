@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {EventType} from '../../../../../types/event.types';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {EventService} from '../../core/services/event.service';
 import {Title} from '@angular/platform-browser';
 import {NgIcon, provideIcons} from '@ng-icons/core';
@@ -42,8 +42,8 @@ export class PurchaseTicketComponent {
   constructor(private route: ActivatedRoute,
               protected eventService: EventService,
               protected ticketService: TicketService,
-              private titleService: Title) {
-
+              private titleService: Title,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -86,8 +86,8 @@ export class PurchaseTicketComponent {
 
     this.ticketService.purchaseTickets(purchaseRequest).subscribe(tickets => {
       if (tickets) {
-        this.purchasedTickets = tickets;
-        console.log("Purchase successful: ", tickets);
+        // Navigate to success page
+        this.router.navigate(['/events', this.event?.id, 'purchase-ticket', 'success']);
       }
     })
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {PurchaseTicketsRequest} from '../../../../../types/ticket.types';
+import {PurchaseTicketsRequest, Ticket} from '../../../../../types/ticket.types';
 import {environment} from '../../../environments/environment';
 import {catchError, map, of} from 'rxjs';
 
@@ -20,6 +20,8 @@ export class TicketService {
   public canReduceTime: boolean = true;
   public isReducingTime: boolean = false;
   public isTimeExpired: boolean = false;
+
+  public purchasedTickets: null | Ticket[] = null;
 
   constructor(private http: HttpClient) { }
 
@@ -42,6 +44,7 @@ export class TicketService {
       map(response => {
         if (response.tickets) {
           this.isPurchasingTickets = false;
+          this.purchasedTickets = response.tickets;
           return response.tickets;
         }
         else {

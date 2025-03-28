@@ -1,0 +1,20 @@
+<div class="page-padding w-full min-h-screen flex flex-col items-center gap-8">
+  @if (ticketService.purchasedTickets && event && !eventService.isLoadingEvent) {
+    <!-- If we have tickets and the event is loaded show the tickets! -->
+    <header class="text-center">
+      <h1 class="text-accent font-semibold tracking-wide text-3xl">Ticket's purchased successfully!</h1>
+      <p class="text-gray-400 font-light">Here's your new tickets. You will also receive your tickets via email within 24 hours.</p>
+    </header>
+
+    <div class="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+      @for (ticket of ticketService.purchasedTickets; track ticket) {
+        <app-ticket-panel [ticket]="ticket" [event]="event"></app-ticket-panel>
+      }
+     </div>
+  }
+
+  <hr class="border w-full border-accent">
+
+  <app-other-events [ignoreEventId]="event?.id"></app-other-events>
+
+</div>
