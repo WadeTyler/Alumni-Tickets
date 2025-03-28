@@ -6,6 +6,7 @@ import {Title} from '@angular/platform-browser';
 import {NgIcon, provideIcons} from '@ng-icons/core';
 import {remixCalendar2Line, remixCouponLine, remixTimeLine} from '@ng-icons/remixicon';
 import {EventPanelComponent} from '../shared/event-panel/event-panel.component';
+import {NgClass} from '@angular/common';
 
 
 @Component({
@@ -14,7 +15,8 @@ import {EventPanelComponent} from '../shared/event-panel/event-panel.component';
   imports: [
     RouterLink,
     NgIcon,
-    EventPanelComponent
+    EventPanelComponent,
+    NgClass
   ],
   templateUrl: './event-details.component.html',
   styles: ``

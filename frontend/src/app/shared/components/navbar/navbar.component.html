@@ -1,18 +1,18 @@
 <div
-  class="fixed top-0 left-0 w-full h-12 px-16 py-2 flex items-center justify-between gap-8 bg-foreground text-white z-50 shadow-xl">
+  class="fixed top-0 left-0 w-full h-12 px-16 py-2 flex items-center justify-between gap-8 bg-foreground/50 backdrop-blur text-white z-50 shadow-xl">
 
   <div class="flex items-center gap-8">
-    <a routerLink="/" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200 text-accent">
+    <a routerLink="/" class="inline-flex gap-2 items-center hover:text-accent-light duration-200 text-accent">
       <ng-icon name="remixCalendarEventLine" class="text-2xl"></ng-icon>
       <h1 class="text-xl font-semibold">Alumni Events</h1>
     </a>
 
-    <a routerLink="/tickets" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
+    <a routerLink="/tickets" class="inline-flex gap-2 items-center hover:text-accent-light duration-200">
       <ng-icon name="remixCouponLine" class="text-lg"></ng-icon>
       <span class="text-base">View Ticket</span>
     </a>
 
-    <a routerLink="/tickets/use" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
+    <a routerLink="/tickets/use" class="inline-flex gap-2 items-center hover:text-accent-light duration-200">
       <ng-icon name="remixCouponLine" class="text-lg"></ng-icon>
       <span class="text-base">Use Ticket</span>
     </a>
@@ -20,7 +20,7 @@
 
   <div class="flex items-center gap-8">
     @if (!this.authService.currentUser()) {
-      <a routerLink="/login" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
+      <a routerLink="/login" class="inline-flex gap-2 items-center hover:text-accent-light duration-200">
         <ng-icon name="remixLoginBoxLine" class="text-lg"></ng-icon>
         <span class="text-base">Login</span>
       </a>
@@ -30,7 +30,7 @@
       </a>
     }
     @else {
-      <button (click)="handleLogout()" class="inline-flex gap-2 items-center hover:text-accent-dark duration-200">
+      <button (click)="handleLogout()" class="inline-flex gap-2 items-center hover:text-accent-light duration-200">
         <ng-icon name="remixLogoutBoxLine" class="text-lg"></ng-icon>
         <span class="text-base">Logout</span>
       </button>
