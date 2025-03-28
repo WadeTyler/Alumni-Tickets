@@ -19,7 +19,7 @@
     <div class="flex md:flex-row flex-col-reverse xl:gap-32 gap-8 xl:items-start items-center justify-center w-full">
 
       <!-- Info Container -->
-      <div class="flex md:flex-col flex-col-reverse gap-4 w-full">
+      <div class="flex md:flex-col flex-col-reverse gap-4 w-full bg-white rounded-md shadow-xl overflow-hidden max-w-4xl">
 
         <!-- Image Container -->
         @if (event.image) {
@@ -31,7 +31,7 @@
         }
 
         <!-- Text Container -->
-        <div class="flex flex-col gap-4 w-full">
+        <div class="flex flex-col gap-4 w-full p-4">
           <h1 class="text-accent text-3xl font-semibold">{{ event.name }}</h1>
           <p class="text-lg text-gray-400 font-light inline-flex items-center gap-2">
             <ng-icon name="remixCalendar2Line" class="text-lg"></ng-icon>
