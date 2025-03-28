@@ -6,12 +6,14 @@ import {EventService} from '../../../core/services/event.service';
 import {ActivatedRoute} from '@angular/router';
 import {TicketPanelComponent} from '../../../shared/components/ticket-panel/ticket-panel.component';
 import {OtherEventsComponent} from '../../../shared/components/other-events/other-events.component';
+import {SpinnerIconComponent} from '../../../shared/components/spinner-icon/spinner-icon.component';
 
 @Component({
   selector: 'app-purchase-ticket-success',
   imports: [
     TicketPanelComponent,
-    OtherEventsComponent
+    OtherEventsComponent,
+    SpinnerIconComponent
   ],
   templateUrl: './purchase-ticket-success.component.html',
   styles: ``
@@ -25,9 +27,6 @@ export class PurchaseTicketSuccessComponent {
 
   ngOnInit() {
     // Check if purchased tickets
-    if (!this.ticketService.purchasedTickets) {
-      return;
-    }
 
 
     this.route.paramMap.subscribe(paramMap => {
