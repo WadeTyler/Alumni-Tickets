@@ -3,13 +3,23 @@
 @import './app/shared/css/animations.css';
 
 :root {
-  --color-foreground: #06062a;
+  --color-foreground: #030311;
   --color-background: #f4f4f4;
-  --color-secondary: #ffbe45;
+  --color-secondary: #fff;
   --color-accent: #5dd5c4;
   --color-accent-dark: #3e9184;
   --color-accent-light: #67eeda;
   --color-danger: #9f0000;
+}
+
+[data-theme="dark"] {
+  --color-foreground: #f4f4f4;
+  --color-background: #030311;
+  --color-secondary: #2a2a2a;
+  --color-accent: #5dd5c4;
+  --color-accent-dark: #3e9184;
+  --color-accent-light: #67eeda;
+  --color-danger: #ec1616;
 }
 
 body {
@@ -48,15 +58,15 @@ body {
 }
 
 .input-label {
-  @apply text-gray-500;
+  @apply text-gray-400;
 }
 
 .input-bar {
-  @apply w-full border border-gray-300 p-2 rounded-md placeholder:text-gray-300 focus:outline-none focus:border-accent duration-200;
+  @apply w-full border border-gray-300 p-2 rounded-md placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:border-accent duration-200;
 }
 
 .form-container {
-  @apply w-full bg-white rounded-md shadow-lg lg:p-8 p-4 flex flex-col lg:gap-8 gap-4;
+  @apply w-full bg-secondary rounded-md shadow-lg lg:p-8 p-4 flex flex-col lg:gap-8 gap-4;
 }
 
 

@@ -1,6 +1,6 @@
 <div
   class="fixed top-0 left-0 w-full h-12 px-16 py-2 flex items-center justify-between gap-8  text-white z-50  animate-fade-in duration-200"
-  [ngClass]="(this.scrollService.isAtTop && isHomePage) ? 'bg-foreground-0' : 'bg-foreground/50 backdrop-blur shadow-xl'"
+  [ngClass]="(this.scrollService.isAtTop && isHomePage) ? 'bg-black/0' : 'bg-black/60 backdrop-blur shadow-xl'"
 >
 
   <div class="flex items-center gap-8">
@@ -20,7 +20,19 @@
     </a>
   </div>
 
+  <!-- Theme Button -->
   <div class="flex items-center gap-8">
+
+    <button (click)="toggleTheme()" class="inline-flex items-center justify-center p-1 hover:bg-accent-dark rounded-full duration-200 cursor-pointer">
+      @if (!isDarkMode) {
+        <ng-icon name="remixMoonLine" class="text-xl"></ng-icon>
+      }
+      @else {
+        <ng-icon name="remixSunLine" class="text-xl"></ng-icon>
+      }
+    </button>
+
+
     @if (!this.authService.currentUser()) {
       <a routerLink="/login" class="inline-flex gap-2 items-center hover:text-accent-light duration-200">
         <ng-icon name="remixLoginBoxLine" class="text-lg"></ng-icon>
