@@ -7,24 +7,41 @@ import {
   remixLoginCircleLine,
   remixLogoutBoxLine
 } from '@ng-icons/remixicon';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
+import {ScrollService} from '../../../core/services/scroll.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NgIcon, RouterLink],
+  imports: [NgIcon, RouterLink, NgClass],
   providers: [provideIcons({ remixCouponLine, remixCalendarEventLine, remixLoginBoxLine, remixLoginCircleLine, remixLogoutBoxLine })],
   templateUrl: './navbar.component.html',
   styles: ``
 })
 export class NavbarComponent {
 
-  constructor(protected authService: AuthService) {
+  isHomePage: boolean = false;
+
+  constructor(protected authService: AuthService, protected scrollService: ScrollService, protected router: Router) {
+  }
+
+  ngOnInit() {
+    this.checkIfHomePage();
+    this.router.events.subscribe(() => {
+      this.checkIfHomePage();
+    })
   }
 
   handleLogout(): void {
     if (this.authService.isLoggingOut) return;
     this.authService.logout().subscribe(val => console.log(val));
   }
+
+  checkIfHomePage() {
+    this.isHomePage = this.router.url === "/";
+  }
+
+
 
 }

@@ -1,5 +1,7 @@
 <div
-  class="fixed top-0 left-0 w-full h-12 px-16 py-2 flex items-center justify-between gap-8 bg-foreground/50 backdrop-blur text-white z-50 shadow-xl animate-fade-down">
+  class="fixed top-0 left-0 w-full h-12 px-16 py-2 flex items-center justify-between gap-8  text-white z-50  animate-fade-in duration-200"
+  [ngClass]="(this.scrollService.isAtTop && isHomePage) ? 'bg-foreground-0' : 'bg-foreground/50 backdrop-blur shadow-xl'"
+>
 
   <div class="flex items-center gap-8">
     <a routerLink="/" class="inline-flex gap-2 items-center hover:text-accent-light duration-200 text-accent">
