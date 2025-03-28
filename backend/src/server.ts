@@ -8,6 +8,7 @@ import db from './config/db.config.ts';
 import authRoutes from './routes/auth.routes.ts';
 import eventRoutes from './routes/event.routes.ts';
 import ticketRoutes from "./routes/ticket.routes.ts";
+import aiRoutes from "./routes/ai.routes.ts";
 
 const corsOptions = {
   origin: "http://localhost:4200",
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/tickets", ticketRoutes);
+app.use("/api/ai", aiRoutes);
 
 const port = process.env.PORT || 8081;
 

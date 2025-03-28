@@ -1,4 +1,4 @@
-<div class="page-padding w-full min-h-screen flex flex-col items-center">
+<div class="page-padding w-full min-h-screen flex flex-col items-center animate-fade-up">
 
   <form class="form-container max-w-[30rem] gap-4! text-sm!" [formGroup]="createEventForm"
         (ngSubmit)="submitCreateEventForm()">
@@ -21,13 +21,33 @@
         class="input-bar resize-none h-24"
         placeholder="Event Description (Ex: This is my birthday party...) Don't forget to add a location if it's a physical event!"
       ></textarea>
-      <!-- Count the number of characters in the description -->
-      <span
-        class="text-xs text-end"
-        [ngClass]="{'text-danger' : createEventForm.get('description')?.value.length > MAX_DESCRIPTION_LENGTH}"
-      >
+      <div class="flex items-center justify-between gap-2">
+        <!-- Improve with AI button -->
+        <button
+          class="submit-btn text-xs" type="button"
+          [ngClass]="{'bg-accent-dark! cursor-not-allowed!' : createEventForm.get('description')?.value.length === 0}"
+          (click)="handleImproveDescription()"
+        >
+          @if (this.aiService.isImprovingDescription) {
+            <app-spinner-icon></app-spinner-icon>
+            <span>Improving...</span>
+          } @else {
+            <ng-icon name="remixBrain2Line" class="text-lg"></ng-icon>
+            <span>Improve with AI</span>
+          }
+        </button>
+
+        <!-- Count the number of characters in the description -->
+        <span
+          class="text-xs text-end"
+          [ngClass]="{'text-danger' : createEventForm.get('description')?.value.length > MAX_DESCRIPTION_LENGTH}"
+        >
         {{ createEventForm.get('description')?.value?.length }} / {{ MAX_DESCRIPTION_LENGTH }}
       </span>
+      </div>
+      @if (this.aiService.improveDescriptionError) {
+        <span class="text-danger text-sm">{{ this.aiService.improveDescriptionError }}</span>
+      }
     </div>
 
     <div class="input-container">
@@ -92,8 +112,14 @@
     }
 
     <button type="submit" class="submit-btn">
-      <ng-icon name="remixCalendarCheckLine" class="text-lg"></ng-icon>
-      <span>Create Event</span>
+      @if (!this.eventService.isCreatingEvent) {
+        <ng-icon name="remixCalendarCheckLine" class="text-lg"></ng-icon>
+        <span>Create Event</span>
+      }
+      @else {
+        <app-spinner-icon></app-spinner-icon>
+        <span>Creating Event...</span>
+      }
     </button>
 
   </form>

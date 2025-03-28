@@ -3,6 +3,7 @@
     "target": "es2017",
     "module": "esnext",
     "esModuleInterop": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "nodenext"
   }
 }

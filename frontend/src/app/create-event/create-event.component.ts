@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgClass} from '@angular/common';
-import {remixCalendarCheckLine} from '@ng-icons/remixicon';
+import {remixBrain2Line, remixCalendarCheckLine} from '@ng-icons/remixicon';
 import {NgIcon, provideIcons} from '@ng-icons/core';
 import {CreateEventRequest} from '../../../../types/event.types';
 import {EventService} from '../core/services/event.service';
 import {Router} from '@angular/router';
+import {AiService} from '../core/services/ai.service';
+import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';
 
 @Component({
   selector: 'app-create-event',
@@ -13,9 +15,10 @@ import {Router} from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     NgClass,
-    NgIcon
+    NgIcon,
+    SpinnerIconComponent
   ],
-  providers: [provideIcons({ remixCalendarCheckLine})],
+  providers: [provideIcons({ remixCalendarCheckLine, remixBrain2Line})],
   templateUrl: './create-event.component.html',
   styles: ``
 })
@@ -36,7 +39,12 @@ export class CreateEventComponent {
 
   imagePreview: string | null = null;
 
-  constructor(protected eventService: EventService, private router: Router) {
+  constructor(protected eventService: EventService, private router: Router, protected aiService: AiService) {
+  }
+
+  ngOnInit() {
+    this.aiService.improveDescriptionError = '';
+    this.eventService.createEventError = '';
   }
 
   onImageSelected(event: any) {
@@ -64,9 +72,11 @@ export class CreateEventComponent {
   }
 
   submitCreateEventForm() {
-    if (this.eventService.isCreatingEvent) {
+    if (this.eventService.isCreatingEvent || this.aiService.isImprovingDescription) {
       return;
     }
+
+    this.aiService.improveDescriptionError = '';
 
     const createRequest: CreateEventRequest = ({
       ...this.createEventForm.value,
@@ -80,6 +90,19 @@ export class CreateEventComponent {
         console.log("Successfully created: ", event);
         this.router.navigate(['/events', event.id]);
       }
+    })
+  }
+
+  handleImproveDescription() {
+    if (this.aiService.isImprovingDescription || this.createEventForm.get('description')?.value.length === 0) return;
+
+    this.aiService.improveDescription(this.createEventForm.get('description')?.value)
+      .subscribe(improvedDescription => {
+        if (improvedDescription) {
+          this.createEventForm.patchValue({
+            description: improvedDescription
+          });
+        }
     })
 
   }
