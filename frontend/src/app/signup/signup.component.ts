@@ -31,7 +31,11 @@ export class SignupComponent {
   }
 
   handleSignupSubmit(): void {
-    if (this.authService.isSigningUp || !this.signupForm.valid) return;
+    if (this.authService.isSigningUp || !this.signupForm.valid) {
+      this.signupForm.get('email')?.markAsTouched();
+      this.signupForm.get('password')?.markAsTouched();
+      return;
+    }
     const signupRequest: AuthRequest = this.signupForm.value;
 
     this.authService.signup(signupRequest).subscribe((val) => {

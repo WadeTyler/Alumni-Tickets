@@ -26,7 +26,11 @@ export class LoginComponent {
   }
 
   handleLoginSubmit(): void {
-    if (this.authService.isLoggingIn || !this.loginForm.valid) return;
+    if (this.authService.isLoggingIn || !this.loginForm.valid) {
+      this.loginForm.get('email')?.markAsTouched();
+      this.loginForm.get('password')?.markAsTouched();
+      return;
+    }
     const loginRequest: AuthRequest = this.loginForm.value;
 
     this.authService.login(loginRequest).subscribe((val) => {

@@ -77,8 +77,14 @@ export class PurchaseTicketComponent {
   }
 
   submitPurchaseForm() {
-    if (this.ticketService.isTimeExpired || !this.event || this.purchaseTicketsForm.invalid || this.ticketService.isPurchasingTickets || this.event.tickets_remaining === 0)
+    if (this.ticketService.isTimeExpired || !this.event || this.purchaseTicketsForm.invalid || this.ticketService.isPurchasingTickets || this.event.tickets_remaining === 0) {
+      this.purchaseTicketsForm.get('first_name')?.markAsTouched();
+      this.purchaseTicketsForm.get('last_name')?.markAsTouched();
+      this.purchaseTicketsForm.get('email')?.markAsTouched();
+      this.purchaseTicketsForm.get('quantity')?.markAsTouched();
       return;
+    }
+
 
     const purchaseRequest: PurchaseTicketsRequest = ({
       ...this.purchaseTicketsForm.value, event_id: this.event.id
