@@ -16,7 +16,7 @@ export async function getAllEventsOrderByDateTimeAsc() {
 }
 
 export async function findEventById(event_id: number): Promise<EventType> {
-  const result = await db.query("SELECT * FROM events WHERE id = $1", [event_id]);
+  const result = await db.query("SELECT * FROM events WHERE id = $1", [Number(event_id)]);
   return result.rows[0];
 }
 
@@ -45,6 +45,7 @@ export async function attemptCreateEvent(createRequest: CreateEventRequest, user
 
 export async function attemptDeleteEvent(event_id: number, user_id: string) {
   const event: EventType = await findEventById(event_id);
+
   if (!event) {
     throw new Error("Event not found.");
   }

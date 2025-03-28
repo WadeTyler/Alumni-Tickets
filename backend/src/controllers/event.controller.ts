@@ -29,8 +29,13 @@ export const getAllEvents = async (req: any, res: any) => {
 
 export const getEvent = async (req: any, res: any) => {
   const event_id: number = req.params.event_id;
+
   if (!event_id)
     return res.status(400).json({message: "event_id is required."});
+
+  if (isNaN(event_id)) {
+    return res.status(400).json({ message: "Event id must be a number."});
+  }
 
   const event: EventType = await findEventById(event_id);
   if (!event)
