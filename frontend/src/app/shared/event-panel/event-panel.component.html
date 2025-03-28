@@ -1,0 +1,35 @@
+<div class="w-full h-full flex flex-col bg-white rounded-md shadow-md overflow-hidden">
+
+  <!-- Image Container -->
+  <div class="w-full h-64 bg-green-200">
+    @if (event.image) {
+      <img class="w-full h-full object-cover object-center" [src]="event.image" alt="Event Image"/>
+    } @else {
+      <img class="w-full h-full object-cover object-center" src="./no-image-available.png" alt="Event Image"/>
+    }
+  </div>
+
+  <!-- Event Details -->
+  <div class="w-full h-full flex flex-col gap-2 p-4 overflow-hidden">
+    <h4 class="text-accent font-semibold text-lg">{{ event.name }}</h4>
+    <p class="text-gray-400 font-light text-sm italic">{{ event.date.split("T")[0] }} &#64; {{ event.time }}</p>
+    @if (event.description) {
+      <p class="font-light text-sm">
+        @if (event.description.length < 80) {
+          {{ event.description }}
+        } @else {
+          {{ event.description.substring(0, 80) + "..." }}
+        }
+      </p>
+    }
+    @if (event.tickets_remaining === 0) {
+      <span class="text-danger font-semibold">SOLD OUT</span>
+    } @else {
+      <span class="font-light text-gray-400">{{ event.tickets_remaining }} Tickets Available</span>
+    }
+
+    <a [routerLink]="['/events', event.id]" class="submit-btn2 w-full mt-auto"><span>View Details</span></a>
+
+  </div>
+
+</div>

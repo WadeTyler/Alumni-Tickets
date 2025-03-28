@@ -30,11 +30,15 @@ body {
 }
 
 .page-padding {
-  @apply lg:p-16 lg:pt-28 md:p-8 md:p-20 p-4 pt-16
+  @apply lg:p-16 lg:pt-28 md:p-8 md:pt-20 p-4 pt-16;
 }
 
 .submit-btn {
   @apply px-3 py-1 rounded-md shadow-md hover:shadow-lg bg-accent hover:bg-accent-dark text-white duration-200 inline-flex gap-2 items-center justify-center cursor-pointer;
+}
+
+.submit-btn2 {
+  @apply px-3 py-1 rounded-md border-accent border hover:shadow-lg bg-transparent hover:bg-accent text-accent hover:text-white duration-200 inline-flex gap-2 items-center justify-center cursor-pointer;
 }
 
 .input-container {
