@@ -7,6 +7,11 @@ const qrCodeUrl = process.env.ENVIRONMENT === 'PRODUCTION' ? process.env.QRCODE_
 
 export async function sendTicketsEmail(tickets: TicketWithEventDetails[], pricePaid: number, email: string) {
 
+  // Only send emails in production
+  if (process.env.ENVIRONMENT !== 'PRODUCTION') {
+    return;
+  }
+
   let urls = `${qrCodeUrl}?codes=`;
 
   tickets.forEach((ticket) => {
