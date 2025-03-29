@@ -1,7 +1,7 @@
 <div class="page-padding w-full flex flex-col items-center gap-8">
 
   @if (ticketService.isLoadingTickets) {
-    <div class="w-full flex flex-col items-center gap-2">
+    <div class="w-full flex flex-col items-center gap-2 animate-fade-in">
       <h1 class="text-accent text-3xl font-semibold text-center">Loading Tickets...</h1>
       <p class="text-gray-400 font-light">Please wait while we fetch your tickets.</p>
     </div>
@@ -10,7 +10,7 @@
   }
 
   @else if (!ticketService.isLoadingTickets && tickets) {
-    <header class="w-full flex flex-col items-center gap-2">
+    <header class="w-full flex flex-col items-center gap-2 animate-fade-up">
 
       @if (justPurchased) {
         <h1 class="text-accent text-3xl font-semibold text-center">Tickets Purchased</h1>
@@ -24,17 +24,20 @@
 
     <hr class="border w-full border-accent">
 
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 animate-fade-up-1">
       @for (ticket of tickets; track ticket) {
         <app-ticket-panel [ticket]="ticket" [eventName]="ticket.name" [eventDate]="ticket.date" [eventTime]="ticket.time" ></app-ticket-panel>
       }
     </div>
 
-    <app-other-events [ignoreEventId]="tickets[0].event_id"></app-other-events>
+    <div class="flex flex-col items-center w-full gap-8 animate-fade-up-2">
+      <hr class="w-full border border-accent">
+      <app-other-events [ignoreEventId]="tickets[0].event_id"></app-other-events>
+    </div>
   }
 
   @else {
-    <div class="w-full flex flex-col items-center gap-2">
+    <div class="w-full flex flex-col items-center gap-2 animate-fade-up">
       <h1 class="text-accent text-3xl font-semibold text-center">No Tickets Found</h1>
       <p class="text-gray-400 font-light">
         @if (ticketService.loadTicketsError) {
@@ -46,7 +49,10 @@
       </p>
     </div>
 
-    <app-other-events></app-other-events>
+    <div class="flex flex-col items-center w-full gap-8 animate-fade-up-2">
+      <hr class="w-full border border-accent">
+      <app-other-events [ignoreEventId]="tickets[0].event_id"></app-other-events>
+    </div>
   }
 
 </div>
