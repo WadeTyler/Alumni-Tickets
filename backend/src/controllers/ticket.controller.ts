@@ -1,4 +1,4 @@
-import type {PurchaseTicketsRequest, Ticket} from "../../../types/ticket.types.ts";
+import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../../../types/ticket.types.ts";
 import {
   attemptPurchaseTickets,
   attemptUseTicket,
@@ -7,15 +7,26 @@ import {
 } from "../utils/ticket.util.ts";
 import type {User} from "../../../types/auth.types.ts";
 import {generateTicketQRCode} from "../utils/qrcode.util.ts";
+import {sendTicketsEmail} from "../utils/emailjs.util.ts";
+import type {EventType} from "../../../types/event.types.ts";
+import {findEventById} from "../utils/event.util.ts";
 
 export const purchaseTicket = async (req: any, res: any) => {
   const purchaseRequest: PurchaseTicketsRequest = req.body;
 
   try {
-    const tickets: Ticket[] = await attemptPurchaseTickets(purchaseRequest);
+    const event: EventType = await findEventById(purchaseRequest.event_id);
+    if (!event) throw new Error("Event not found.");
+
+    const tickets: TicketWithEventDetails[] = await attemptPurchaseTickets(purchaseRequest);
+
+    // Send email with tickets
+    await sendTicketsEmail(tickets, event.ticket_price * purchaseRequest.quantity, purchaseRequest.email);
+
     return res.status(201).json({message: "Tickets purchased successfully.", tickets});
   } catch (e) {
-    return res.status(400).json({message: e.message});
+    console.log(e);
+    return res.status(400).json({message: e.message || "Something went wrong. Try again later."});
   }
 }
 

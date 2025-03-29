@@ -25,6 +25,7 @@ export type TicketWithEventDetails = {
   date: string;
   time: string;
   creator_id: string;
+  url?: string;
 }
 
 export type PurchaseTicketsRequest = {

@@ -1,4 +1,4 @@
-import type {PurchaseTicketsRequest, Ticket} from "../../../types/ticket.types.ts";
+import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../../../types/ticket.types.ts";
 import {isValidEmail} from "./util.ts";
 import {findEventById} from "./event.util.ts";
 import db from '../config/db.config.ts';
@@ -6,7 +6,7 @@ import type {User} from "../../../types/auth.types.ts";
 import type {EventType} from "../../../types/event.types.ts";
 import {generateTicketQRCode} from "./qrcode.util.ts";
 
-export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsRequest): Promise<Ticket[]> {
+export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsRequest): Promise<TicketWithEventDetails[]> {
   validatePurchaseRequest(purchaseRequest);
 
   // Check if event exists
@@ -49,7 +49,15 @@ export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsReq
       tickets.push(ticket);
     }
 
-    return tickets;
+    const ticketsWithDetails: TicketWithEventDetails[] = [];
+
+    for (const ticket of tickets) {
+      const fullTicket = await findTicketByCodeJoinEvent(ticket.code);
+      fullTicket.qr_code = await generateTicketQRCode(ticket.code);
+      ticketsWithDetails.push(fullTicket);
+    }
+
+    return ticketsWithDetails;
   } catch (e) {
     // If we put the tickets on hold and get an error, then add them back.
     if (ticketsRemoved) {
