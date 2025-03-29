@@ -54,7 +54,7 @@ export class NavbarComponent {
 
   handleLogout(): void {
     if (this.authService.isLoggingOut) return;
-    this.authService.logout().subscribe(val => console.log(val));
+    this.authService.logout().subscribe();
   }
 
   checkIfHomePage() {

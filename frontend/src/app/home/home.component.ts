@@ -29,7 +29,6 @@ export class HomeComponent {
     this.eventService.loadEvents().subscribe({
       next: (events) => {
         this.events = events;
-        console.log("Events loaded.");
       },
       error: (error) => {
         console.error("Error loading events: ", error);

@@ -53,7 +53,6 @@ export class AuthService {
 
     return this.http.post<any>(`${this.apiURL}/auth/login`, loginRequest, {withCredentials: true}).pipe(
       map(response => {
-        console.log(response)
         if (response && response.user) {
           this.currentUserSubject.next(response.user);
           this.isLoggingIn = false;
@@ -109,8 +108,6 @@ export class AuthService {
   // Attempt logout
   public logout(): Observable<any> {
     this.isLoggingOut = true;
-
-    console.log("Logout called");
 
     return this.http.post(`${this.apiURL}/auth/logout`, {}, {withCredentials: true}).pipe(
       map(response => {

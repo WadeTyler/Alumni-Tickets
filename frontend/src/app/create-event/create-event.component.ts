@@ -87,7 +87,6 @@ export class CreateEventComponent {
     })
     this.eventService.createEvent(createRequest).subscribe(event => {
       if (event) {
-        console.log("Successfully created: ", event);
         this.router.navigate(['/events', event.id]);
       }
     })

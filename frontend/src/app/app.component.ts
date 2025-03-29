@@ -18,7 +18,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.authService.getUser().subscribe(user => console.log(user));
+    this.authService.getUser().subscribe();
   }
 
   @HostListener('window:scroll', ['$event'])

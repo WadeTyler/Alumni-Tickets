@@ -50,8 +50,6 @@ export const getTicketByCode = async (req: any, res: any) => {
 export const getTicketsByCodes = async (req: any, res: any) => {
   const codesStr: string = req.query.codes;
 
-  console.log(codesStr);
-
   if (!codesStr) {
     return res.status(400).json({ message: "No codes provided." });
   }

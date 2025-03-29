@@ -40,7 +40,6 @@ export class TicketsComponent {
         (tickets) => {
           if (tickets) {
             this.tickets = tickets;
-            console.log('tickets', tickets);
           }
         }
       );
