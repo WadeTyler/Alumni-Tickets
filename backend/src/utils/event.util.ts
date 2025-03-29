@@ -4,7 +4,7 @@ import db from "../config/db.config.ts";
 import {handleUpload} from "./cloudinary.util.ts";
 
 // VARS
-const MAX_USER_EVENTS = 5;
+const MAX_USER_EVENTS = 10;
 
 async function countEventsByUserId(userId: string) {
   const result = await db.query("SELECT * FROM events WHERE creator_id = $1", [userId]);
