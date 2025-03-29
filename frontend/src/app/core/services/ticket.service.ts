@@ -14,6 +14,9 @@ export class TicketService {
   DEFAULT_TICKET_TIMER: number = 600; // 10 minutes
 
   // States
+  public isLoadingTickets: boolean = false;
+  public loadTicketsError: string = '';
+
   public isPurchasingTickets: boolean = false;
   public purchaseTicketsError: string = '';
   public timeRemaining: number = this.DEFAULT_TICKET_TIMER;
@@ -56,6 +59,27 @@ export class TicketService {
         this.isPurchasingTickets = false;
         this.startReducingTime(); // Resume timer
         return of(null);
+      })
+    )
+  }
+
+  // Attempt to fetch tickets by codes
+  public loadTicketsByCodes(codesStr: string) {
+    this.isLoadingTickets = true;
+    this.loadTicketsError = '';
+
+    return this.http.get<any>(`${this.apiURL}/tickets?codes=${codesStr}`).pipe(
+      map(response => {
+        if (response.tickets) {
+          this.isLoadingTickets = false;
+          return response.tickets;
+        }
+        throw new Error(response.message);
+      }),
+      catchError(e => {
+        this.loadTicketsError = e.error.message || "Something went wrong. Try again later.";
+        this.isLoadingTickets = false;
+        return of([]);
       })
     )
   }

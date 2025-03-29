@@ -4,6 +4,7 @@ import {findEventById} from "./event.util.ts";
 import db from '../config/db.config.ts';
 import type {User} from "../../../types/auth.types.ts";
 import type {EventType} from "../../../types/event.types.ts";
+import {generateTicketQRCode} from "./qrcode.util.ts";
 
 export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsRequest): Promise<Ticket[]> {
   validatePurchaseRequest(purchaseRequest);
@@ -41,7 +42,9 @@ export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsReq
        purchaseRequest.last_name
       ]);
 
-      const ticket = result.rows[0];
+      const ticket: Ticket = result.rows[0];
+
+      ticket.qr_code = await generateTicketQRCode(ticket.code);
 
       tickets.push(ticket);
     }
@@ -101,5 +104,12 @@ function validatePurchaseRequest(request: PurchaseTicketsRequest) {
 
 export async function findTicketByCode(code: string): Promise<Ticket> {
   const result = await db.query("SELECT * FROM tickets WHERE code = $1", [code]);
-  return result.rows[0];
+  if (result.rows) return result.rows[0];
+  else return null;
+}
+
+export async function findTicketByCodeJoinEvent(code: string) {
+  const result = await db.query("SELECT tickets.*, events.name, events.date, events.time, events.creator_id FROM tickets JOIN events ON tickets.event_id = events.id WHERE tickets.code = $1", [code]);
+  if (result.rows) return result.rows[0];
+  else return null;
 }

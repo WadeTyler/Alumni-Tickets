@@ -90,10 +90,18 @@ export class PurchaseTicketComponent {
       ...this.purchaseTicketsForm.value, event_id: this.event.id
     });
 
-    this.ticketService.purchaseTickets(purchaseRequest).subscribe(tickets => {
+    this.ticketService.purchaseTickets(purchaseRequest).subscribe((tickets: Ticket[]) => {
       if (tickets) {
-        // Navigate to success page
-        this.router.navigate(['/events', this.event?.id, 'purchase-ticket', 'success']);
+        // Navigate to tickets page
+
+        const codeStr = tickets.map((ticket) => ticket.code).join(',');
+
+        this.router.navigate(['/tickets'], {
+          queryParams: {
+            codes: codeStr,
+            justPurchased: 'true'
+          }
+        });
       }
     })
   }

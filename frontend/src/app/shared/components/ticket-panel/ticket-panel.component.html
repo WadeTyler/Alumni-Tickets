@@ -3,17 +3,22 @@
   <!-- Event Info -->
   <header class="flex flex-col gap-2">
     <h5 class="text-xl text-accent font-semibold">
-      <a [routerLink]="['/events', event.id]">{{ event.name }}</a>
+      <a [routerLink]="['/events', ticket.event_id]">{{ eventName }}</a>
     </h5>
     <p class="text-lg text-gray-400 font-light inline-flex items-center gap-2">
       <ng-icon name="remixCalendar2Line" class="text-lg"></ng-icon>
-      <span>{{ event.date.split("T")[0] }}</span>
+      <span>{{ eventDate.split("T")[0] }}</span>
     </p>
     <p class="text-lg text-gray-400 font-light inline-flex items-center gap-2">
       <ng-icon name="remixTimeLine" class="text-lg"></ng-icon>
-      <span>{{ event.time }}</span>
+      <span>{{ eventTime }}</span>
     </p>
   </header>
+
+  <!-- QR Code -->
+  @if (ticket.qr_code) {
+    <img [src]="convertBase64ToImageSource(ticket.qr_code)" alt="Ticket QR Code" class="w-full h-64 object-contain">
+  }
 
   <hr class="border w-full border-accent">
 
@@ -23,5 +28,8 @@
     <p>Last Name: {{ ticket.last_name }}</p>
     <p>Email: {{ ticket.email }}</p>
     <p>Code: {{ ticket.code }}</p>
+    @if (ticket.used) {
+      <p class="text-danger text-lg text-center font-bold">Ticket Used</p>
+    }
   </div>
 </div>

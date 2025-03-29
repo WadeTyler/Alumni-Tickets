@@ -1,6 +1,12 @@
 import type {PurchaseTicketsRequest, Ticket} from "../../../types/ticket.types.ts";
-import {attemptPurchaseTickets, attemptUseTicket, findTicketByCode} from "../utils/ticket.util.ts";
+import {
+  attemptPurchaseTickets,
+  attemptUseTicket,
+  findTicketByCode,
+  findTicketByCodeJoinEvent
+} from "../utils/ticket.util.ts";
 import type {User} from "../../../types/auth.types.ts";
+import {generateTicketQRCode} from "../utils/qrcode.util.ts";
 
 export const purchaseTicket = async (req: any, res: any) => {
   const purchaseRequest: PurchaseTicketsRequest = req.body;
@@ -39,5 +45,39 @@ export const getTicketByCode = async (req: any, res: any) => {
     return res.status(404).json({message: "Ticket not found."});
 
   return res.status(200).json({message: "Ticket retrieved successfully.", ticket});
+}
 
+export const getTicketsByCodes = async (req: any, res: any) => {
+  const codesStr: string = req.query.codes;
+
+  console.log(codesStr);
+
+  if (!codesStr) {
+    return res.status(400).json({ message: "No codes provided." });
+  }
+
+  const codes: string[] = codesStr.split(",").map(code => code.trim());
+
+  if (!codes) {
+    return res.status(400).json({ message: "No valid codes found." });
+  }
+
+  const tickets: Ticket[] = [];
+
+  for (let i = 0; i < codes.length; i++) {
+    const ticket = await findTicketByCodeJoinEvent(codes[i]);
+    if (!ticket) {
+      return res.status(404).json({ message: `Ticket with code ${codes[i]} not found.` });
+    }
+    if (tickets.find(t => t.code === ticket.code)) {
+      return res.status(400).json({ message: `Duplicate ticket code found: ${ticket.code}.` });
+    }
+
+    ticket.qr_code = await generateTicketQRCode(ticket.code);
+
+    // Add to stack of tickets
+    tickets.push(ticket);
+  }
+
+  return res.status(200).json({ message: "Tickets retrieved successfully.", tickets });
 }

@@ -4,11 +4,9 @@ import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {EventDetailsComponent} from './event-details/event-details.component';
 import {PurchaseTicketComponent} from './event-details/purchase-ticket/purchase-ticket.component';
-import {
-  PurchaseTicketSuccessComponent
-} from './event-details/purchase-ticket/purchase-ticket-success/purchase-ticket-success.component';
 import {CreateEventComponent} from './create-event/create-event.component';
 import {AuthGuard} from './core/guards/auth.guard';
+import {TicketsComponent} from './tickets/tickets.component';
 
 export const routes: Routes = [
   {
@@ -38,9 +36,9 @@ export const routes: Routes = [
     title: "Purchase Ticket | Alumni Events"
   },
   {
-    path: "events/:id/purchase-ticket/success",
-    component: PurchaseTicketSuccessComponent,
-    title: "Ticket's Purchased! | Alumni Events"
+    path: "tickets",
+    component: TicketsComponent,
+    title: "Tickets | Alumni Events",
   },
   {
     path: "",
