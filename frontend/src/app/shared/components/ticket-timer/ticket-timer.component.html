@@ -1,4 +1,4 @@
-<div class="md:max-w-[30rem] w-[calc(100%-1rem)] md:text-sm text-xs text-center py-2 px-4 bg-danger text-white rounded-lg fixed bottom-4 right-1/2 translate-x-1/2 shadow-lg">
+<div class="md:max-w-[30rem] w-[calc(100%-1rem)] md:text-sm text-xs text-center py-2 px-4 bg-danger text-white rounded-lg fixed bottom-4 right-1/2 translate-x-1/2 shadow-lg z-40">
   @if (this.ticketService.timeRemaining > 0) {
     <p>
       Act fast! You have {{ Math.floor(this.ticketService.timeRemaining / 60) }}:{{ (this.ticketService.timeRemaining % 60).toString().padStart(2, '0') }} minutes to purchase your ticket(s)!

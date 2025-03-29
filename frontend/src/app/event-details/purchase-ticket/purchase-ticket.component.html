@@ -1,6 +1,4 @@
 <div class="page-padding w-full min-h-screen flex lg:gap-16 animate-fade-up">
-
-
   @if (!event && !this.eventService.isLoadingEvent) {
     <!-- EVENT NOT FOUND -->
     <div class="w-full h-full flex items-center justify-center">
@@ -134,10 +132,11 @@
         </form>
       }
 
-      <app-ticket-timer></app-ticket-timer>
-
     </div>
   }
 
-
 </div>
+
+@if (event) {
+  <app-ticket-timer></app-ticket-timer>
+}
