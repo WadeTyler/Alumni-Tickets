@@ -19,6 +19,10 @@ export class TicketService {
 
   public isPurchasingTickets: boolean = false;
   public purchaseTicketsError: string = '';
+
+  public isUsingTicket: boolean = false;
+  public useTicketError: string = '';
+
   public timeRemaining: number = this.DEFAULT_TICKET_TIMER;
   public canReduceTime: boolean = true;
   public isReducingTime: boolean = false;
@@ -80,6 +84,28 @@ export class TicketService {
         this.loadTicketsError = e.error.message || "Something went wrong. Try again later.";
         this.isLoadingTickets = false;
         return of([]);
+      })
+    )
+  }
+
+  // Attempt to use ticket
+  public useTicket(ticketCode: string) {
+    this.isUsingTicket = true;
+    this.useTicketError = '';
+
+    return this.http.put<any>(`${this.apiURL}/tickets/${ticketCode}/use`, {}, {withCredentials: true}).pipe(
+      map(response => {
+        if (response.ticket) {
+          this.isUsingTicket = false;
+          return response.ticket;
+        }
+        throw new Error(response.message);
+      }),
+      catchError(e => {
+        this.useTicketError = e.error.message || "Something went wrong. Try again later.";
+        this.isUsingTicket = false;
+        console.log(e);
+        return of(null);
       })
     )
   }

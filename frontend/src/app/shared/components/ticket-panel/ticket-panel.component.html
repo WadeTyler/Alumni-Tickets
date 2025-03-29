@@ -2,7 +2,7 @@
 
   <!-- Event Info -->
   <header class="flex flex-col gap-2">
-    <h5 class="text-xl text-accent font-semibold">
+    <h5 class="text-xl text-accent font-semibold hover:text-accent-light hover:underline w-fit cursor-pointer">
       <a [routerLink]="['/events', ticket.event_id]">{{ eventName }}</a>
     </h5>
     <p class="text-lg text-gray-400 font-light inline-flex items-center gap-2">
@@ -31,5 +31,13 @@
     @if (ticket.used) {
       <p class="text-danger text-lg text-center font-bold">Ticket Used</p>
     }
+    @else if (ticket.creator_id === authService.currentUser()?.id) {
+      <button class="submit-btn" (click)="handleUseTicket()">Use Ticket</button>
+
+      @if (_useTicketError) {
+        <p class="text-danger text-sm text-center font-light">{{ _useTicketError }}</p>
+      }
+    }
+
   </div>
 </div>
