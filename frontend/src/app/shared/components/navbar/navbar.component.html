@@ -1,46 +1,45 @@
 <div
-  class="fixed top-0 left-0 w-full h-12 px-16 py-2 flex items-center justify-between gap-8  text-white z-50  animate-fade-in duration-200"
+  class="fixed top-0 left-0 w-full h-12 md:px-16 px-4 py-2 flex items-center justify-between gap-8  text-white z-50  animate-fade-in duration-200"
   [ngClass]="(this.scrollService.isAtTop && isHomePage) ? 'bg-black/0' : 'bg-black/60 backdrop-blur shadow-xl'"
 >
 
-  <div class="flex items-center gap-8">
+  <div class="flex items-center md:gap-8 gap-4">
     <a routerLink="/" class="inline-flex gap-2 items-center hover:text-accent-light duration-200 text-accent">
-      <ng-icon name="remixCalendarEventLine" class="text-2xl"></ng-icon>
-      <h1 class="text-xl font-semibold">Alumni Events</h1>
+      <ng-icon name="remixCalendarEventLine" class="lg:text-2xl text-xl"></ng-icon>
+      <h1 class="lg:text-xl text-sm font-semibold">Alumni Events</h1>
     </a>
   </div>
 
   <!-- Theme Button -->
-  <div class="flex items-center gap-8">
-
+  <div class="flex items-center md:gap-8 gap-4">
     <button (click)="toggleTheme()" class="inline-flex items-center justify-center p-1 hover:bg-accent-dark rounded-full duration-200 cursor-pointer">
       @if (!isDarkMode) {
-        <ng-icon name="remixMoonLine" class="text-xl"></ng-icon>
+        <ng-icon name="remixMoonLine" class="md:text-xl"></ng-icon>
       }
       @else {
-        <ng-icon name="remixSunLine" class="text-xl"></ng-icon>
+        <ng-icon name="remixSunLine" class="md:text-xl"></ng-icon>
       }
     </button>
 
 
     @if (!this.authService.currentUser()) {
       <a routerLink="/login" class="inline-flex gap-2 items-center hover:text-accent-light duration-200">
-        <ng-icon name="remixLoginBoxLine" class="text-lg"></ng-icon>
-        <span class="text-base">Login</span>
+        <ng-icon name="remixLoginBoxLine" class="md:text-lg"></ng-icon>
+        <span class="md:text-base text-sm">Login</span>
       </a>
       <a routerLink="/signup" class="submit-btn">
-        <ng-icon name="remixLoginCircleLine" class="text-lg"></ng-icon>
-        <span class="text-base">Signup</span>
+        <ng-icon name="remixLoginCircleLine" class="md:text-lg"></ng-icon>
+        <span class="md:text-base text-sm">Signup</span>
       </a>
     }
     @else {
       <button (click)="handleLogout()" class="inline-flex gap-2 items-center hover:text-accent-light duration-200 cursor-pointer">
-        <ng-icon name="remixLogoutBoxLine" class="text-lg"></ng-icon>
-        <span class="text-base">Logout</span>
+        <ng-icon name="remixLogoutBoxLine" class="md:text-lg"></ng-icon>
+        <span class="md:text-base text-sm">Logout</span>
       </button>
       <a routerLink="/events/create" class="submit-btn">
-        <ng-icon name="remixCalendarEventLine" class="text-lg"></ng-icon>
-        <span class="text-base">Create Event</span>
+        <ng-icon name="remixCalendarEventLine" class="md:text-lg"></ng-icon>
+        <span class="md:text-base text-sm">Create Event</span>
       </a>
     }
 
