@@ -1,9 +1,9 @@
-import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../../../types/ticket.types.ts";
+import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../types/ticket.types.ts";
 import {isValidEmail} from "./util.ts";
 import {findEventById} from "./event.util.ts";
 import db from '../config/db.config.ts';
-import type {User} from "../../../types/auth.types.ts";
-import type {EventType} from "../../../types/event.types.ts";
+import type {User} from "../types/auth.types.ts";
+import type {EventType} from "../types/event.types.ts";
 import {generateTicketQRCode} from "./qrcode.util.ts";
 
 export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsRequest): Promise<TicketWithEventDetails[]> {

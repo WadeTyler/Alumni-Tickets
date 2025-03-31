@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {EventService} from '../core/services/event.service';
-import {EventType} from '../../../../types/event.types';
+import {EventType} from '../../types/event.types';
 import {EventPanelComponent} from '../shared/components/event-panel/event-panel.component';
 import {CreateEventPanelComponent} from '../shared/components/create-event-panel/create-event-panel.component';
 import {NgIcon, provideIcons} from '@ng-icons/core';

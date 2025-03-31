@@ -3,7 +3,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {NgClass} from '@angular/common';
 import {remixBrain2Line, remixCalendarCheckLine} from '@ng-icons/remixicon';
 import {NgIcon, provideIcons} from '@ng-icons/core';
-import {CreateEventRequest} from '../../../../types/event.types';
+import {CreateEventRequest} from '../../types/event.types';
 import {EventService} from '../core/services/event.service';
 import {Router} from '@angular/router';
 import {AiService} from '../core/services/ai.service';

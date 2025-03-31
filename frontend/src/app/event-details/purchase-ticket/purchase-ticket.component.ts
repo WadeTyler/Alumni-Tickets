@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {EventType} from '../../../../../types/event.types';
+import {EventType} from '../../../types/event.types';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {EventService} from '../../core/services/event.service';
 import {Title} from '@angular/platform-browser';
 import {NgIcon, provideIcons} from '@ng-icons/core';
 import {remixCalendar2Line, remixShoppingCartLine, remixTimeLine} from '@ng-icons/remixicon';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {PurchaseTicketsRequest, Ticket} from '../../../../../types/ticket.types';
+import {PurchaseTicketsRequest, Ticket} from '../../../types/ticket.types';
 import {TicketService} from '../../core/services/ticket.service';
 import {NgIf} from '@angular/common';
 import {TicketTimerComponent} from '../../shared/components/ticket-timer/ticket-timer.component';

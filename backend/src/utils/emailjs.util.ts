@@ -1,5 +1,5 @@
 import emailjs from "../config/emailjs.config.ts";
-import type {TicketWithEventDetails} from "../../../types/ticket.types.ts";
+import type {TicketWithEventDetails} from "../types/ticket.types.ts";
 
 const serviceId = process.env.EMAILJS_SERVICE_ID;
 const templateId = process.env.EMAILJS_TEMPLATE_ID;

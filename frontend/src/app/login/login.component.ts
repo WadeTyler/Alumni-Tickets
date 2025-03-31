@@ -3,7 +3,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import {remixLoader2Line, remixLoginBoxLine} from '@ng-icons/remixicon';
 import {AuthService} from '../core/services/auth.service';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthRequest} from '../../../../types/auth.types';
+import {AuthRequest} from '../../types/auth.types';
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgClass, NgIf} from '@angular/common';
 import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {EventType} from '../../../../types/event.types';
+import {EventType} from '../../types/event.types';
 import {EventService} from '../core/services/event.service';
 import {Title} from '@angular/platform-browser';
 import {NgIcon, provideIcons} from '@ng-icons/core';

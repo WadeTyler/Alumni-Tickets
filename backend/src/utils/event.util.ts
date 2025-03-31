@@ -1,5 +1,5 @@
-import type {CreateEventRequest, EventType} from "../../../types/event.types.ts";
-import type {User} from "../../../types/auth.types.ts";
+import type {CreateEventRequest, EventType} from "../types/event.types.js";
+import type {User} from "../types/auth.types.ts";
 import db from "../config/db.config.ts";
 import {handleUpload} from "./cloudinary.util.ts";
 

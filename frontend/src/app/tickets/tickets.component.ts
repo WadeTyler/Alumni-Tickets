@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {TicketWithEventDetails} from '../../../../types/ticket.types';
+import {TicketWithEventDetails} from '../../types/ticket.types';
 import {TicketService} from '../core/services/ticket.service';
 import {TicketPanelComponent} from '../shared/components/ticket-panel/ticket-panel.component';
 import {OtherEventsComponent} from '../shared/components/other-events/other-events.component';

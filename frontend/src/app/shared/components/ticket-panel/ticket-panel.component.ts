@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TicketWithEventDetails} from '../../../../../../types/ticket.types';
+import {TicketWithEventDetails} from '../../../../types/ticket.types';
 import {NgIcon, provideIcons} from '@ng-icons/core';
 import {remixCalendar2Line, remixTimeLine} from '@ng-icons/remixicon';
 import {RouterLink} from '@angular/router';

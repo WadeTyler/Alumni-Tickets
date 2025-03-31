@@ -1,5 +1,5 @@
 import db from '../config/db.config.ts';
-import type {AuthRequest, User} from "../../../types/auth.types.ts";
+import type {AuthRequest, User} from "../types/auth.types.ts";
 import {encodePassword, isPasswordMatch} from "./password.util.ts";
 import type {CookieOptions} from "express";
 

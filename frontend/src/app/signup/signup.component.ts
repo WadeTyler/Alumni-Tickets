@@ -4,7 +4,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from '../core/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthRequest} from '../../../../types/auth.types';
+import {AuthRequest} from '../../types/auth.types';
 import {remixLoginCircleLine} from '@ng-icons/remixicon';
 import {SpinnerIconComponent} from '../shared/components/spinner-icon/spinner-icon.component';
 

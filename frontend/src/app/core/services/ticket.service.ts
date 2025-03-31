@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {PurchaseTicketsRequest, Ticket} from '../../../../../types/ticket.types';
+import {PurchaseTicketsRequest, Ticket} from '../../../types/ticket.types';
 import {environment} from '../../../environments/environment';
 import {catchError, map, of} from 'rxjs';
 

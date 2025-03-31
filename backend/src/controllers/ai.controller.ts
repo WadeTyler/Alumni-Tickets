@@ -1,6 +1,6 @@
 
 import {attemptImproveDescription, countAiRequestTodayByUserId, logAiRequest, MAX_AI_REQUESTS_PER_DAY} from "../utils/ai.util.ts";
-import type {User} from "../../../types/auth.types.ts";
+import type {User} from "../types/auth.types.ts";
 
 
 export const improveDescription = async (req: any, res: any) => {

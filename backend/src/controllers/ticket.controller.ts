@@ -1,14 +1,14 @@
-import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../../../types/ticket.types.ts";
+import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../types/ticket.types.ts";
 import {
   attemptPurchaseTickets,
   attemptUseTicket,
   findTicketByCode,
   findTicketByCodeJoinEvent
 } from "../utils/ticket.util.ts";
-import type {User} from "../../../types/auth.types.ts";
+import type {User} from "../types/auth.types.ts";
 import {generateTicketQRCode} from "../utils/qrcode.util.ts";
 import {sendTicketsEmail} from "../utils/emailjs.util.ts";
-import type {EventType} from "../../../types/event.types.ts";
+import type {EventType} from "../types/event.types.ts";
 import {findEventById} from "../utils/event.util.ts";
 
 export const purchaseTicket = async (req: any, res: any) => {

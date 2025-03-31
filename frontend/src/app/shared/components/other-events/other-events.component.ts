@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {EventType} from '../../../../../../types/event.types';
+import {EventType} from '../../../../types/event.types';
 import {EventService} from '../../../core/services/event.service';
 import {EventPanelComponent} from '../event-panel/event-panel.component';
 import {CreateEventPanelComponent} from '../create-event-panel/create-event-panel.component';
