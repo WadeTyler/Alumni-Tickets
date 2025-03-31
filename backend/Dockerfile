@@ -9,6 +9,7 @@ RUN npm install -g typescript
 RUN npm install -g tsx
 COPY . .
 RUN npm install tsc
+RUN npm build
 
 EXPOSE 8081
 
