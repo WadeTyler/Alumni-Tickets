@@ -1,5 +1,5 @@
-import openai from '../config/openai.config.ts';
-import db from '../config/db.config.ts';
+import openai from '../config/openai.config.js';
+import db from '../config/db.config.js';
 
 export const MAX_AI_REQUESTS_PER_DAY = 8;
 
@@ -14,7 +14,7 @@ export async function attemptImproveDescription(description: string) {
     ]
   });
 
-  if (response) {
+  if (response.choices[0].message.content) {
     return response.choices[0].message.content;
   }
 
@@ -33,5 +33,5 @@ export async function logAiRequest(user_id: string, request_text: string, respon
 
 export async function countAiRequestTodayByUserId(user_id: string) {
   const result = await db.query("SELECT id FROM ai_requests WHERE user_id = $1 AND created_at >= CURRENT_DATE", [user_id]);
-  return result.rowCount;
+  return result.rowCount || 0;
 }

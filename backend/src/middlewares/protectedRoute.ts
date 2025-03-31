@@ -1,10 +1,10 @@
 import 'dotenv/config';
-import {decodeToken} from "../utils/jwt.util.ts";
-import {findUserById} from "../utils/auth.util.ts";
+import {decodeToken} from "../utils/jwt.util.js";
+import {findUserById} from "../utils/auth.util.js";
 
 const protectedRoute = async (req: any, res: any, next: any) => {
   try {
-    const authToken = req.cookies[process.env.AUTH_COOKIE_NAME];
+    const authToken = req.cookies[process.env.AUTH_COOKIE_NAME as string];
     // No auth token found
     if (!authToken) {
       throw new Error("No auth token provided.");

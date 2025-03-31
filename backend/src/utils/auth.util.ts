@@ -1,6 +1,6 @@
-import db from '../config/db.config.ts';
-import type {AuthRequest, User} from "../types/auth.types.ts";
-import {encodePassword, isPasswordMatch} from "./password.util.ts";
+import db from '../config/db.config.js';
+import type {AuthRequest, User} from "../types/auth.types.js";
+import {encodePassword, isPasswordMatch} from "./password.util.js";
 import type {CookieOptions} from "express";
 
 export async function findUserById(id: string) {
@@ -22,7 +22,7 @@ export async function attemptLogin(loginRequest: AuthRequest) {
   const user: User = result.rows[0];
 
   // Check if found by email
-  if (!user) return undefined;
+  if (!user || !user.password) return undefined;
 
   // Check passwords match
   if (!await isPasswordMatch(loginRequest.password, user.password)) {

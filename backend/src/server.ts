@@ -2,13 +2,13 @@ import express from 'express';
 import cookieParser from "cookie-parser";
 import cors from 'cors';
 import 'dotenv/config';
-import db from './config/db.config.ts';
+import db from './config/db.config.js';
 
 // Route imports
-import authRoutes from './routes/auth.routes.ts';
-import eventRoutes from './routes/event.routes.ts';
-import ticketRoutes from "./routes/ticket.routes.ts";
-import aiRoutes from "./routes/ai.routes.ts";
+import authRoutes from './routes/auth.routes.js';
+import eventRoutes from './routes/event.routes.js';
+import ticketRoutes from "./routes/ticket.routes.js";
+import aiRoutes from "./routes/ai.routes.js";
 
 const corsOptions = {
   origin: "http://localhost:4200",

@@ -1,11 +1,11 @@
-import type {CreateEventRequest, EventType} from "../types/event.types.ts";
-import type {User} from "../types/auth.types.ts";
+import type {CreateEventRequest, EventType} from "../types/event.types.js";
+import type {User} from "../types/auth.types.js";
 import {
   attemptCreateEvent,
   attemptDeleteEvent,
   findEventById,
   getAllEventsOrderByDateTimeAsc
-} from "../utils/event.util.ts";
+} from "../utils/event.util.js";
 
 
 export const createEvent = async (req: any, res: any) => {
@@ -16,8 +16,8 @@ export const createEvent = async (req: any, res: any) => {
     const event: Event = await attemptCreateEvent(createEventRequest, user);
 
     return res.status(201).json({message: "Event created successfully.", event});
-  } catch (e) {
-    return res.status(400).json({message: e.message});
+  } catch (e: any) {
+    return res.status(400).json({message: e.message || "Something went wrong. Try again later."});
   }
 }
 
@@ -56,7 +56,7 @@ export const deleteEvent = async (req: any, res: any) => {
   try {
     await attemptDeleteEvent(event_id, user.id);
     return res.status(200).json({message: "Event deleted successfully."});
-  } catch (e) {
-    return res.status(400).json({message: e.message});
+  } catch (e: any) {
+    return res.status(400).json({message: e.message || "Something went wrong. Try again later."});
   }
 }

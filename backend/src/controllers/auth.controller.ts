@@ -5,10 +5,10 @@ import {
   existsByEmail,
   getAuthCookieOptions,
   getLogoutCookieOptions
-} from "../utils/auth.util.ts";
-import {isValidEmail} from "../utils/util.ts";
-import type {AuthRequest, User} from "../types/auth.types.ts";
-import {createAuthToken} from "../utils/jwt.util.ts";
+} from "../utils/auth.util.js";
+import {isValidEmail} from "../utils/util.js";
+import type {AuthRequest, User} from "../types/auth.types.js";
+import {createAuthToken} from "../utils/jwt.util.js";
 
 export const signup = async (req: any, res: any) => {
   const signupRequest: AuthRequest = req.body;

@@ -8,6 +8,6 @@ export async function generateTicketQRCode(text: string) {
     return QRCode.toDataURL(ticketQRCodeURL + "?codes=" + text);
   } catch (e) {
     console.error("Error generating QR code: ", e);
-    return null;
+    return undefined;
   }
 }

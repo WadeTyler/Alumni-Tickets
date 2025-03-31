@@ -1,9 +1,9 @@
-import emailjs from "../config/emailjs.config.ts";
-import type {TicketWithEventDetails} from "../types/ticket.types.ts";
+import emailjs from "../config/emailjs.config.js";
+import type {TicketWithEventDetails} from "../types/ticket.types.js";
 
-const serviceId = process.env.EMAILJS_SERVICE_ID;
-const templateId = process.env.EMAILJS_TEMPLATE_ID;
-const qrCodeUrl = process.env.ENVIRONMENT === 'PRODUCTION' ? process.env.QRCODE_URL : 'http://localhost:4200/tickets';
+const serviceId = process.env.EMAILJS_SERVICE_ID as string;
+const templateId = process.env.EMAILJS_TEMPLATE_ID as string;
+const qrCodeUrl = (process.env.ENVIRONMENT as string) === 'PRODUCTION' ? (process.env.QRCODE_URL as string) : 'http://localhost:4200/tickets';
 
 export async function sendTicketsEmail(tickets: TicketWithEventDetails[], pricePaid: number, email: string) {
 

@@ -1,15 +1,15 @@
-import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../types/ticket.types.ts";
+import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../types/ticket.types.js";
 import {
   attemptPurchaseTickets,
   attemptUseTicket,
   findTicketByCode,
   findTicketByCodeJoinEvent
-} from "../utils/ticket.util.ts";
-import type {User} from "../types/auth.types.ts";
-import {generateTicketQRCode} from "../utils/qrcode.util.ts";
-import {sendTicketsEmail} from "../utils/emailjs.util.ts";
-import type {EventType} from "../types/event.types.ts";
-import {findEventById} from "../utils/event.util.ts";
+} from "../utils/ticket.util.js";
+import type {User} from "../types/auth.types.js";
+import {generateTicketQRCode} from "../utils/qrcode.util.js";
+import {sendTicketsEmail} from "../utils/emailjs.util.js";
+import type {EventType} from "../types/event.types.js";
+import {findEventById} from "../utils/event.util.js";
 
 export const purchaseTicket = async (req: any, res: any) => {
   const purchaseRequest: PurchaseTicketsRequest = req.body;
@@ -24,7 +24,7 @@ export const purchaseTicket = async (req: any, res: any) => {
     await sendTicketsEmail(tickets, event.ticket_price * purchaseRequest.quantity, purchaseRequest.email);
 
     return res.status(201).json({message: "Tickets purchased successfully.", tickets});
-  } catch (e) {
+  } catch (e: any) {
     console.log(e);
     return res.status(400).json({message: e.message || "Something went wrong. Try again later."});
   }
@@ -40,7 +40,7 @@ export const useTicket = async (req: any, res: any) => {
   try {
     const ticket = await attemptUseTicket(code, user);
     return res.status(200).json({message: "Ticket is VALID. Ticket has now been used.", ticket});
-  } catch (e) {
+  } catch (e: any) {
     return res.status(400).json({message: e.message});
   }
 }
@@ -51,7 +51,7 @@ export const getTicketByCode = async (req: any, res: any) => {
   if (!code)
     return res.status(400).json({message: "Code is required."});
 
-  const ticket: Ticket = await findTicketByCode(code);
+  const ticket: Ticket | null = await findTicketByCode(code);
   if (!ticket)
     return res.status(404).json({message: "Ticket not found."});
 

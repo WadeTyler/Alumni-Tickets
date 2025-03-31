@@ -1,6 +1,6 @@
 
-import {attemptImproveDescription, countAiRequestTodayByUserId, logAiRequest, MAX_AI_REQUESTS_PER_DAY} from "../utils/ai.util.ts";
-import type {User} from "../types/auth.types.ts";
+import {attemptImproveDescription, countAiRequestTodayByUserId, logAiRequest, MAX_AI_REQUESTS_PER_DAY} from "../utils/ai.util.js";
+import type {User} from "../types/auth.types.js";
 
 
 export const improveDescription = async (req: any, res: any) => {
@@ -20,6 +20,8 @@ export const improveDescription = async (req: any, res: any) => {
 
   try {
     const improvedDescription = await attemptImproveDescription(description);
+
+
 
     // Log request
     await logAiRequest(user.id, description, improvedDescription);

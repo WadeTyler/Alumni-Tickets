@@ -1,10 +1,10 @@
 import type {PurchaseTicketsRequest, Ticket, TicketWithEventDetails} from "../types/ticket.types.ts";
-import {isValidEmail} from "./util.ts";
-import {findEventById} from "./event.util.ts";
-import db from '../config/db.config.ts';
-import type {User} from "../types/auth.types.ts";
-import type {EventType} from "../types/event.types.ts";
-import {generateTicketQRCode} from "./qrcode.util.ts";
+import {isValidEmail} from "./util.js";
+import {findEventById} from "./event.util.js";
+import db from '../config/db.config.js';
+import type {User} from "../types/auth.types.js";
+import type {EventType} from "../types/event.types.js";
+import {generateTicketQRCode} from "./qrcode.util.js";
 
 export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsRequest): Promise<TicketWithEventDetails[]> {
   validatePurchaseRequest(purchaseRequest);
@@ -58,7 +58,7 @@ export async function attemptPurchaseTickets(purchaseRequest: PurchaseTicketsReq
     }
 
     return ticketsWithDetails;
-  } catch (e) {
+  } catch (e: any) {
     // If we put the tickets on hold and get an error, then add them back.
     if (ticketsRemoved) {
       await db.query("UPDATE events SET tickets_remaining = tickets_remaining + $1 WHERE id = $2", [purchaseRequest.quantity, purchaseRequest.event_id]);
@@ -110,7 +110,7 @@ function validatePurchaseRequest(request: PurchaseTicketsRequest) {
   }
 }
 
-export async function findTicketByCode(code: string): Promise<Ticket> {
+export async function findTicketByCode(code: string): Promise<Ticket | null> {
   const result = await db.query("SELECT * FROM tickets WHERE code = $1", [code]);
   if (result.rows) return result.rows[0];
   else return null;

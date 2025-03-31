@@ -1,7 +1,7 @@
 import type {CreateEventRequest, EventType} from "../types/event.types.js";
-import type {User} from "../types/auth.types.ts";
-import db from "../config/db.config.ts";
-import {handleUpload} from "./cloudinary.util.ts";
+import type {User} from "../types/auth.types.js";
+import db from "../config/db.config.js";
+import {handleUpload} from "./cloudinary.util.js";
 
 // VARS
 const MAX_USER_EVENTS = 10;
