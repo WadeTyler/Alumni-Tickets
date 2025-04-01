@@ -83,13 +83,13 @@ export class CreateEventComponent {
       image: this.imagePreview,
       total_tickets: Number(this.createEventForm.get('total_tickets')?.value),
       tickets_remaining: Number(this.createEventForm.get('tickets_remaining')?.value),
-      ticket_price: Number(this.createEventForm.get('ticket_price')?.value) * 100,  // Convert to cents
+      ticket_price: Math.round(Number(this.createEventForm.get('ticket_price')?.value) * 100),  // Convert to cents
     })
     this.eventService.createEvent(createRequest).subscribe(event => {
       if (event) {
         this.router.navigate(['/events', event.id]);
       }
-    })
+    });
   }
 
   handleImproveDescription() {
