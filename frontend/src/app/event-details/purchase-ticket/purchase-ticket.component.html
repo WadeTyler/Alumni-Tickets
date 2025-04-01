@@ -14,15 +14,15 @@
     </div>
   } @else if (event && !this.eventService.isLoadingEvent && event.tickets_remaining !== 0) {
     <!-- PURCHASE PANEL -->
-    <div class="flex md:flex-row flex-col-reverse xl:gap-32 gap-8 xl:items-start items-center justify-center w-full">
+    <div class="flex md:flex-row flex-col-reverse gap-8 xl:items-start items-center justify-center w-full">
 
       <!-- Info Container -->
       <div class="flex md:flex-col flex-col-reverse gap-4 w-full bg-secondary rounded-md shadow-xl overflow-hidden max-w-4xl">
 
         <!-- Image Container -->
         @if (event.image) {
-          <div class="xl:max-w-4xl max-w-full">
-            <div class="aspect-video relative">
+          <div class="w-full max-w-4xl">
+            <div class="relative">
               <img [src]="event.image" alt="Event Image" class="w-full h-full object-center object-cover">
             </div>
           </div>
