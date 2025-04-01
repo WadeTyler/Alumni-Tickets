@@ -28,7 +28,7 @@
           } @else {
             <!-- Price per ticket and price remaining -->
             <p class="font-light text-gray-400 inline-flex gap-4 justify-between items-center">
-              <span>${{ event.ticket_price / 100 }} USD / Ticket</span>
+              <span>${{ (event.ticket_price / 100).toFixed(2) }} USD / Ticket</span>
               <span>{{ event.tickets_remaining }} Tickets Available</span>
             </p>
 

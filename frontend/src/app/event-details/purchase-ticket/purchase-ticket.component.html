@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <p class="text-gray-400 font-light">Total Price: ${{ totalPrice / 100 }} USD</p>
+          <p class="text-gray-400 font-light">Total Price: ${{ (totalPrice / 100).toFixed(2) }} USD</p>
 
           @if (this.ticketService.purchaseTicketsError) {
             <p class="text-danger text-sm">{{ this.ticketService.purchaseTicketsError }}</p>
